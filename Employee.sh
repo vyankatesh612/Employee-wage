@@ -18,14 +18,21 @@ function getWorkingHour(){
   echo $empHour
 }
 
-
-  while [[ $day -lt $WORKING_DAY && $hour -le $WORKING_HOUR ]]
+function calculateDailyWage(){
+	local hour=$1
+	dailyWage=$(($1*$WAGE_PER_HOUR))
+	echo $dailyWage
+}
+  while [[ $day -lt $WORKING_DAY && $totalworkinghours -le $WORKING_HOUR ]]
   do
      workingHours="$( getWorkingHour $((RANDOM%3)) )"
      totalworkinghours=$(($totalworkinghours+$workingHours))
-     day=$(($day + 1))
+     empDailyWage[$day]="$(calculateDailyWage $workingHours)"
+     ((day++))
   done
   
-  echo "Total Work Hour:" $totalworkinghours
+  
  
+totalwage="$(calculateDailyWage $totalworkinghours)"
+echo "Employee total wage " ${empDailyWage[@]}
 
