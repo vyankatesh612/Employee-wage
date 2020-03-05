@@ -14,7 +14,9 @@ function getWorkingHour(){
             ;;  
            $isPartTime) empHour=4
             ;;
-     esac
+     			*) empHour=0
+				;;
+	esac
   echo $empHour
 }
 
@@ -35,4 +37,5 @@ function calculateDailyWage(){
  
 totalwage="$(calculateDailyWage $totalworkinghours)"
 echo "Employee total wage " ${empDailyWage[@]}
+echo "Day" ${!empDailyWage[@]}
 
